@@ -1,7 +1,3 @@
-# Created by https://www.toptal.com/developers/gitignore/api/executable
-# Edit at https://www.toptal.com/developers/gitignore?templates=executable
-
-### Executable ###
 *.app
 *.bat
 *.cgi
@@ -15,5 +11,13 @@
 *.java
 *.docx
 *.pdf
-
-# End of https://www.toptal.com/developers/gitignore/api/executable
+*.xlsx
+*.js
+*.html
+*.css
+*.py
+*.ipynb
+*.txt
+*.rb
+*.pptx
+*.dat
