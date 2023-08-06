@@ -1,41 +1,3 @@
-/*
-	INSERTION
-	----------------------------------------------------------
-	1) If the ROOT is NULL, set the new NODE to BLACK.
-	2) If the PARENT is BLACK, there is no violation.
-	3) If the PARENT is RED:
-		1) If the UNCLE is RED:
-			- Change the color of PARENT and UNCLE to BLACK.
-			- Change the color of GRANDPARENT to RED.
-		2) If the UNCLE is BLACK:
-			- Perform a SINGLE/DOUBLE ROTATION at the GRANDPARENT.
-			- Change the color of PARENT to BLACK and both CHILDREN to RED.
-	
-	DELETION
-	----------------------------------------------------------
-	- Follow a similar DELETION process as in a Binary Search Tree (BST).
-	- Choose either the RIGHT-MOST node of the LEFT CHILD or the LEFT-MOST node of the RIGHT CHILD.
-	
-	1) If the NODE-TO-DELETE is RED, there is no violation.
-	2) If the NODE-TO-DELETE is BLACK:
-		- Delete the NODE.
-		- Mark the location as DOUBLEBLACK.
-			1) If the SIBLING is RED:
-				- Set the Parent's color to RED.
-				- Set the SIBLING's color to BLACK.
-				- Perform a SPECIAL ROTATION at the Parent of the DOUBLEBLACK.
-				- Recheck the DOUBLEBLACK condition.
-			2) If the SIBLING is BLACK:
-				1) If both CHILDREN of the SIBLING are BLACK:
-					- Change the SIBLING's color to RED.
-					- Move the DOUBLEBLACK condition to the PARENT.
-					- If the parent is BLACK, recheck the DOUBLEBLACK condition.
-				2) If one of the CHILDREN of the SIBLING is RED:
-					- Perform a SINGLE/DOUBLE ROTATION AT the PARENT.
-					- The color positions remain the same as the previous state.
-
-*/
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
@@ -230,7 +192,7 @@ bool existRedChild(struct RBT *sibling){
 		else {
 			if(sibling->left && sibling->left->color == RED) return true;
 			if(sibling->right && sibling->right->color == RED) return true;
-		} 
+		}
 		return false;
 	}
 }
@@ -238,11 +200,11 @@ bool existRedChild(struct RBT *sibling){
 void fixDoubleBlack(struct RBT *curr, struct RBT *parent){
 	if(curr == root){
 		return;
-	}	
-	
+	}
+
 	struct RBT *sibling;
 	bool onLeftParent;
-	
+
 	// get sibling position and value
 	if(parent->left == curr){
 		sibling = parent->right;
@@ -251,7 +213,7 @@ void fixDoubleBlack(struct RBT *curr, struct RBT *parent){
 		sibling = parent->left;
 		onLeftParent = true;
 	}
-	
+
 	if(!sibling){
 		// if sibling is null then check up blackness to parent
 		fixDoubleBlack(parent, parent->parent);
@@ -271,14 +233,14 @@ void fixDoubleBlack(struct RBT *curr, struct RBT *parent){
 		// condition sibling black
 		if(existRedChild(sibling) == true){
 			// condition when curr is black and there's exists at least one red child
-			if(sibling->left && sibling->left->color == RED){ 
+			if(sibling->left && sibling->left->color == RED){
 				//condition if sibling is on left with red color
 				if(onLeftParent == true){
 					// left left condition
 					sibling->left->color = sibling->color;
 					sibling->color = parent->color;
 					parent = rightRotate(parent);
-				} else { 
+				} else {
 					// right left condition
 					sibling->left->color = parent->color;
 					sibling = rightRotate(sibling);
@@ -292,7 +254,7 @@ void fixDoubleBlack(struct RBT *curr, struct RBT *parent){
 					sibling = leftRotate(sibling);
 					parent = rightRotate(parent);
 				} else {
-					// right right condition 
+					// right right condition
 					sibling->right->color = sibling->color;
 					sibling->color = parent->color;
 					parent = leftRotate(parent);
@@ -302,20 +264,20 @@ void fixDoubleBlack(struct RBT *curr, struct RBT *parent){
 		} else {
 			// condition when curr is black and there're two black child
 			sibling->color = RED;
-			
+
 			// if parent color is black then up blackness to parent
 			if(parent->color == BLACK){
-				fixDoubleBlack(parent, parent->parent);	
+				fixDoubleBlack(parent, parent->parent);
 			} else {
 				parent->color = BLACK;
 			}
-		}	
+		}
 	}
-	
+
 }
 
 void executeDeleteNode(struct RBT* parent, struct RBT* curr){
-	// condition when node is leaf 
+	// condition when node is leaf
 	if(!curr->left && !curr->right){
 		if(curr != root){
 			if(curr->color == BLACK) fixDoubleBlack(curr, parent);
@@ -368,7 +330,7 @@ void executeDeleteNode(struct RBT* parent, struct RBT* curr){
 		free(curr);
 		curr = NULL;
 	} else {
-		// condition when there're two children 
+		// condition when there're two children
 		struct RBT *predesuccessor = curr->left;
 		parent = curr;
 		while(predesuccessor && predesuccessor->right){
@@ -415,9 +377,9 @@ int main(){
 		insert(root, createNode(10));
 		preorder(root); puts("");
 	}
-	
+
 	int i; for(i = 0; i < 10; i++){
-		deletenode(root, i+1);	
+		deletenode(root, i+1);
 		preorder(root); puts("\n");
 		getchar();
 	}
