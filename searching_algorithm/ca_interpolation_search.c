@@ -4,13 +4,14 @@
 
 int interpolationSearch(int arr[], int key, int len) {
     int mid, min = 0, max = len - 1;
-    while (arr[min] <= key && arr[max] >= key) {
+    while(arr[min] <= key && arr[max] >= key) {
         // Prevent division by zero
-        if (arr[min] == arr[max]) {
-            if (arr[min] == key)
+        if(arr[min] == arr[max]) {
+            if(arr[min] == key){
                 return true;
-            else
+            } else {
                 return false;
+            }
         }
 
         mid = min + ((key - arr[min]) * (max - min)) / (arr[max] - arr[min]);
