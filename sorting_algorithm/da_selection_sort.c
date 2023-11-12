@@ -15,7 +15,7 @@ void selectionSort(int arr[], int len){
                 smallest = j; // change smallest index to j, if arr[j] < arr[smallest]
             }
         }
-        swap(&arr[i], &arr[smallest]);
+        if(smallest != i) swap(&arr[i], &arr[smallest]);
     }
 }
 
