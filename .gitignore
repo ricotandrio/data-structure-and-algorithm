@@ -33,3 +33,5 @@ Thumbs.db
 
 # Ignore environment files (if you use .env files for sensitive data)
 .env
+
+__test__

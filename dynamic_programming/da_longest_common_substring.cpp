@@ -40,7 +40,7 @@ int longest_common_substring(char *str1, char *str2) {
 }
 
 int main() {
-    char str1[] = "abcdef", str2[] = "zabcmabcabcabcde";
+    char str1[] = "10010101", str2[] = "010110110";
 
     int length = longest_common_substring(str1, str2);
     printf("Length of Longest Common Substring: %d\n", length);
