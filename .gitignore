@@ -21,3 +21,17 @@
 *.rb
 *.pptx
 *.dat
+
+# Ignore Visual Studio Code settings
+.vscode/
+
+# Ignore debugging files
+*.log
+
+# Ignore Windows thumbnail cache files
+Thumbs.db
+
+# Ignore environment files (if you use .env files for sensitive data)
+.env
+
+__test__
