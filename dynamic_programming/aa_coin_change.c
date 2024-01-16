@@ -26,7 +26,7 @@ int coinChange(int *coin, int sum){
 
 int main(){
 	int coin[] = {1, 2, 5};
-	int sum = 25;
+	int sum = 6;
 	printf("%d\n", coinChange(coin, sum));
 	return 0;
 }

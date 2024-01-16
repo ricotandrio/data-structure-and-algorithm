@@ -13,6 +13,7 @@ int coinChange(int *coin, int sum){
 			if(j == 0) arr[i][j] = 0;
 			else if(i == 0 && j > 0) arr[i][j] = INT_MAX;
 			else if(j == coin[i - 1]) arr[i][j] = 1;
+			else if(j < coin[i - 1]) arr[i][j] = arr[i - 1][j];
 			else {
 				int include = arr[i][j - coin[i - 1]] + 1;
 				int exclude = arr[i - 1][j];
@@ -29,7 +30,7 @@ int coinChange(int *coin, int sum){
 }
 
 int main(){
-	int coin[] = {1, 3, 4};
+	int coin[] = {1, 2, 5};
 	int sum = 6;
 	printf("%d\n", coinChange(coin, sum));
 	return 0;

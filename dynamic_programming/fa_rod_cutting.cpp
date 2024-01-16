@@ -38,7 +38,7 @@ int cutrod(int *price, int n){
  
 int main(){
     int price[] = {1, 5, 8, 9, 10, 17, 17, 20, 24, 30};
-    int length = 4;
+    int length = 10;
 
     cout << "Maximum Obtainable Value is "<< cutrod(price, length);
     return 0;
